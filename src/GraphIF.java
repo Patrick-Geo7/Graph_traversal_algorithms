@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public interface GraphInterface {
+public interface GraphIF {
     void initialize();
     int size();
     ArrayList<node>

@@ -1,7 +1,8 @@
-import java.util.ArrayList;
 
 public interface GraphIF {
-    void initialize();
+    void initialize(String path)throws Exception;
     int size();
-    ArrayList<node>
+    boolean Dijkstra(int s, int[]costs, int[]parentsi);
+    boolean BellmanFord(int s, int[]costs, int[]parents);
+    boolean FloydWarshall(long[][] costs,long[][] predecessors);
 }

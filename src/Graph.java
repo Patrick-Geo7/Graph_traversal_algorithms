@@ -11,6 +11,17 @@ public class Graph implements GraphIF {
     int[][] edgeList;
     long [][] costs;
     int INF=100000000;
+    static class AdjListNode {
+        int vertex, weight;
+
+        AdjListNode(int v, int w)
+        {
+            vertex = v;
+            weight = w;
+        }
+        int getVertex() { return vertex; }
+        int getWeight() { return weight; }
+    }
     @Override
     public void initialize(String path) throws Exception{
         // TODO Auto-generated method stub
@@ -24,6 +35,7 @@ public class Graph implements GraphIF {
         graphArray=new long[V][V];
         edgeList=new int[E][3];
   //       Double positiveInfinity = Double.POSITIVE_INFINITY;
+        
         //initializing the adjacency matrix
         for(int i=0;i<V;i++) {
             for(int j=0;j<V;j++) {
@@ -77,6 +89,7 @@ public class Graph implements GraphIF {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'Dijkstra'");
     }
+
     public void dist1d(int[] arr,int s){
         int i=0;
         System.out.println("distances array");

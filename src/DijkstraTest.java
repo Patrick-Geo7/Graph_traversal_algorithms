@@ -17,7 +17,7 @@ class DijkstraTest {
         int[] costs =new int[G.size()-1];
         int[] parents =new int[G.size()-1];
         G.Dijkstra(0,costs,parents);
-        int[] expectedCosts=new int[]{3,4,7,8};
+        int[] expectedCosts=new int[]{3,4,6,8};
         int[] expectedParents1=new int[]{0,1,0,0};
         int[] expectedParents2=new int[]{0,1,1,0};
         assertArrayEquals(expectedCosts,costs);

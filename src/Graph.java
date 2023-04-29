@@ -11,7 +11,8 @@ public class Graph implements GraphIF {
     int[][] edgeList;
     long [][] costs;
     int INF=100000000;
-   
+    boolean hasNegative;
+
     @Override
     public void initialize(String path) throws Exception{
         // TODO Auto-generated method stub
@@ -43,6 +44,9 @@ public class Graph implements GraphIF {
                  edgeList[i][j] = parseInt(line[j]);
              }
              graphArray[parseInt(line[0])][parseInt(line[1])] = parseInt(line[2]);
+             if(parseInt(line[2])<0){
+                 this.hasNegative=true;
+             }
          }
         br.close();
     }
@@ -171,13 +175,13 @@ public class Graph implements GraphIF {
             }
         }
 
-        for(i=0;i<V;i++)
-       {
-           for(j=0;j<V;j++)
-           {
-               System.out.println(costs[i][j]);
-           }
-       }
+//        for(i=0;i<V;i++)
+//       {
+//           for(j=0;j<V;j++)
+//           {
+//               System.out.println(costs[i][j]);
+//           }
+//       }
         for(i=0;i<V;i++)
         {
               if(costs[i][i]!=0)

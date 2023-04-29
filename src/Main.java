@@ -23,6 +23,7 @@ public class Main {
             System.out.println("enter -1 to exit");
             Scanner s = new Scanner(System.in);
             String path = s.nextLine();
+
             if(Objects.equals(path, "-1"))
                 break;
             Graph G = new Graph();
@@ -183,7 +184,7 @@ public class Main {
                                         System.out.println("Destination out of bound !");
                                         break;
                                     }
-                                    System.out.println("cost from " + source + "to " + destination + " = " + costs[destination]+"\n");
+                                    System.out.println("cost from " + source + " to " + destination + " = " + costs[destination]+"\n");
                                 }
                             }
                             case 2 -> {

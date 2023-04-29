@@ -11,17 +11,7 @@ public class Graph implements GraphIF {
     int[][] edgeList;
     long [][] costs;
     int INF=100000000;
-    static class AdjListNode {
-        int vertex, weight;
-
-        AdjListNode(int v, int w)
-        {
-            vertex = v;
-            weight = w;
-        }
-        int getVertex() { return vertex; }
-        int getWeight() { return weight; }
-    }
+   
     @Override
     public void initialize(String path) throws Exception{
         // TODO Auto-generated method stub

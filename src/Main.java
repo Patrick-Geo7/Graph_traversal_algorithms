@@ -1,4 +1,13 @@
+import java.util.Scanner;
+
 public class Main {
+    public void menu(){
+        System.out.println("enter the file path describing the graph");
+        Scanner s=new Scanner(System.in);
+        String path=s.nextLine();
+
+
+    }
     public static void main(String[] args) throws Exception {
         Graph graph=new Graph();
         graph.initialize("src/input1.txt");

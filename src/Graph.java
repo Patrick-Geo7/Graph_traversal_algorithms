@@ -11,6 +11,7 @@ public class Graph implements GraphIF {
     long[][] graphArray; //adjacency matrix
     int[][] edgeList;
     long[][] costs;
+    boolean hasNegative;
     int INF = 100000000;
 
     @Override
@@ -44,6 +45,9 @@ public class Graph implements GraphIF {
                 edgeList[i][j] = parseInt(line[j]);
             }
             graphArray[parseInt(line[0])][parseInt(line[1])] = parseInt(line[2]);
+            if(parseInt(line[2])<0){
+                this.hasNegative=true;
+            }
         }
         br.close();
     }

@@ -61,7 +61,9 @@ public class Main {
                                         System.out.println("source out of bound");
                                         break;
                                     }
+                                    long startTime = System.nanoTime();
                                     G.Dijkstra(source, costs, parents);
+                                    long endTime = System.nanoTime();
                                     while (true) {
                                         System.out.println("enter destination node for source "+source);
                                         System.out.println("enter -1 to finish");
@@ -72,7 +74,9 @@ public class Main {
                                             System.out.println("Destination out of bound !");
                                             break;
                                         }
-                                        System.out.println("cost from "+source+" to "+destination+" = " +costs[destination]+"\n");
+                                        System.out.println("cost from "+source+" to "+destination+" = " +costs[destination]);
+                                        long t=(endTime - startTime )/ 1000;
+                                        System.out.println("time = "+ (float)t/1000+" ms\n");
                                     }
                                 }
                             }
@@ -88,7 +92,9 @@ public class Main {
                                         System.out.println("source out of bound");
                                         break;
                                     }
+                                    long startTime = System.nanoTime();
                                     G.BellmanFord(source, costs, parents);
+                                    long endTime = System.nanoTime();
                                     while (true) {
                                         System.out.println("enter destination node for source "+source);
                                         System.out.println("enter -1 to finish");
@@ -99,12 +105,17 @@ public class Main {
                                             System.out.println("Destination out of bound !");
                                             break;
                                         }
-                                        System.out.println("cost from "+source+" to "+destination+" = " +costs[destination]+"\n");
+                                        System.out.println("cost from "+source+" to "+destination+" = " +costs[destination]);
+                                        long t=(endTime - startTime )/ 1000;
+                                        System.out.println("time = "+ (float)t/1000+" ms\n");
+
                                     }
                                 }
                             }
                             case 2 -> {
+                                long startTime = System.nanoTime();
                                 G.FloydWarshall(costsF, predecessors);
+                                long endTime = System.nanoTime();
                                 System.out.println("--------Floyd Warshall's algorithm-------");
                                 System.out.println("enter source");
                                 System.out.println("enter -1 to exit process");
@@ -125,7 +136,9 @@ public class Main {
                                         System.out.println("Destination out of bound !");
                                         break;
                                     }
-                                    System.out.println("cost from "+source+" to "+destination+" = " +costsF[source][destination]+"\n");
+                                    System.out.println("cost from "+source+" to "+destination+" = " +costsF[source][destination]);
+                                    long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (float)t/1000+" ms\n");
                                 }
                             }
                         }
@@ -149,7 +162,9 @@ public class Main {
                                         System.out.println("source out of bound");
                                         break;
                                     }
+                                    long startTime = System.nanoTime();
                                     G.Dijkstra(source, costs, parents);
+                                    long endTime = System.nanoTime();
                                     System.out.println("enter destination");
                                     System.out.println("enter -1 to exit process");
                                     destination = s.nextInt();
@@ -159,7 +174,9 @@ public class Main {
                                         System.out.println("Destination out of bound !");
                                         break;
                                     }
-                                    System.out.println("cost from " + source + " to " + destination + " = "  + costs[destination]+"\n");
+                                    System.out.println("cost from " + source + " to " + destination + " = "  + costs[destination]);
+                                    long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (float)t/1000+" ms\n");
                                 }
                             }
                             case 1 -> {
@@ -174,7 +191,9 @@ public class Main {
                                         System.out.println("source out of bound");
                                         break;
                                     }
+                                    long startTime = System.nanoTime();
                                     G.BellmanFord(source, costs, parents);
+                                    long endTime = System.nanoTime();
                                     System.out.println("enter destination");
                                     System.out.println("enter -1 to exit process");
                                     destination = s.nextInt();
@@ -184,7 +203,9 @@ public class Main {
                                         System.out.println("Destination out of bound !");
                                         break;
                                     }
-                                    System.out.println("cost from " + source + " to " + destination + " = " + costs[destination]+"\n");
+                                    System.out.println("cost from " + source + " to " + destination + " = " + costs[destination]);
+                                    long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (float)t/1000+" ms\n");
                                 }
                             }
                             case 2 -> {
@@ -199,7 +220,9 @@ public class Main {
                                         System.out.println("source out of bound");
                                         break;
                                     }
+                                    long startTime = System.nanoTime();
                                     G.FloydWarshall(costsF, predecessors);
+                                    long endTime = System.nanoTime();
                                     System.out.println("enter destination ");
                                     System.out.println("enter -1 to exit process\n");
                                     destination = s.nextInt();
@@ -209,7 +232,9 @@ public class Main {
                                         System.out.println("Destination out of bound !");
                                         break;
                                     }
-                                    System.out.println("cost from " + source + " to " + destination + " = " + costsF[source][destination]+"\n");
+                                    System.out.println("cost from " + source + " to " + destination + " = " + costsF[source][destination]);
+                                    long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (float)t/1000+" ms\n");
                                 }
                             }
                         }
@@ -220,15 +245,15 @@ public class Main {
     }
     public static void main(String[] args) throws Exception {
 //        Graph graph=new Graph();
-//        graph.initialize("src/input1.txt");
+//        graph.initialize("src/testFiles/input3.txt");
 ////        graph.printEdgeList();
 ////        graph.printAdjacencyMatrix();
 //        int[] costs =new int[graph.size()];
 //        int[] parents =new int[graph.size()];
-//        graph.BellmanFord(0,costs,parents);
+//        graph.BellmanFord(7,costs,parents);
 //        graph.dist1d(costs,0);
 //        graph.printParents(parents);
         Main m=new Main();
-        m.menu();
+       m.menu();
     }
 }

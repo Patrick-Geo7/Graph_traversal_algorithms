@@ -4,5 +4,5 @@ public interface GraphIF {
     int size();
     boolean Dijkstra(int s, int[]costs, int[]parentsi);
     boolean BellmanFord(int s, int[]costs, int[]parents);
-    boolean FloydWarshall(long[][] costs,long[][] predecessors);
+    boolean FloydWarshall(int[][] costs,int[][] predecessors);
 }

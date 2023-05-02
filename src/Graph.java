@@ -8,9 +8,8 @@ import static java.lang.Integer.parseInt;
 public class Graph implements GraphIF {
     int V;
     int E;
-    long[][] graphArray; //adjacency matrix
+    int[][] graphArray; //adjacency matrix
     int[][] edgeList;
-    long[][] costs;
     boolean hasNegative;
     int INF = 100000000;
 
@@ -24,10 +23,9 @@ public class Graph implements GraphIF {
         String[] input = st.split(" ");
         V = parseInt(input[0]);
         E = parseInt(input[1]);
-        graphArray = new long[V][V];
+        graphArray = new int[V][V];
         edgeList = new int[E][3];
         //       Double positiveInfinity = Double.POSITIVE_INFINITY;
-
         //initializing the adjacency matrix
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
@@ -50,6 +48,12 @@ public class Graph implements GraphIF {
             }
         }
         br.close();
+//        for (int i = 0; i < V; i++) {
+//            for (int j = 0; j < V; j++) {
+//                System.out.print(graphArray[i][j]+" ");
+//            }
+//            System.out.print("\n");
+//        }
     }
 //             if(st.charAt(4)=='-')
 //             {
@@ -67,9 +71,9 @@ public class Graph implements GraphIF {
     }
 
     public void printAdjacencyMatrix() {
-        for (long[] r : graphArray) {
+        for (int[] r : graphArray) {
             String s = "";
-            for (long i : r) {
+            for (int i : r) {
                 s += i + " ";
             }
             System.out.println(s);
@@ -201,44 +205,70 @@ public class Graph implements GraphIF {
         return true;
     }
 
-    @Override
-    public boolean FloydWarshall(long[][] costs, long[][] predecessors) {
-        // TODO Auto-generated method stub
-        costs = new long[V][V];
-        int i, j, k;
-        for (i = 0; i < V; i++)
-            for (j = 0; j < V; j++)
-                costs[i][j] = predecessors[i][j];
-
-//        for(i=0;i<V;i++)
-//        {
-//            for(j=0;j<V;j++)
-//            {
+   // @Override
+//    public boolean FloydWarshall(long[][] costs, long[][] predecessors) {
+//        //ODO Auto-generated method stub
+//        costs = new long[V][V];
+//        int i, j, k;
+//        for (i = 0; i < V; i++)
+//            for (j = 0; j < V; j++)
+//                costs[i][j] = predecessors[i][j];
+//
+////        for(i=0;i<V;i++)
+////        {
+////            for(j=0;j<V;j++)
+////            {
+////                System.out.println(costs[i][j]);
+////            }
+////        }
+//
+//        // Adding vertices individually
+//        for (k = 0; k < V; k++) {
+//            for (i = 0; i < V; i++) {
+//                for (j = 0; j < V; j++) {
+//                    costs[i][j] = Math.min(costs[i][j], costs[i][k] + costs[k][j]);
+//                }
+//            }
+//        }
+//        for (i = 0; i < V; i++) {
+//            for (j = 0; j < V; j++) {
 //                System.out.println(costs[i][j]);
 //            }
 //        }
-
-        // Adding vertices individually
-        for (k = 0; k < V; k++) {
-            for (i = 0; i < V; i++) {
-                for (j = 0; j < V; j++) {
-                    costs[i][j] = Math.min(costs[i][j], costs[i][k] + costs[k][j]);
-                }
-            }
-        }
-
-        for (i = 0; i < V; i++) {
-            for (j = 0; j < V; j++) {
-                System.out.println(costs[i][j]);
-            }
-        }
-        for (i = 0; i < V; i++) {
-            if (costs[i][i] != 0)
-                return true;
-        }
-        return false;
-    }
-
+//        for (i = 0; i < V; i++) {
+//            if (costs[i][i] != 0)
+//                return true;
+//        }
+//        return false;
+//    }
+   public boolean FloydWarshall(int[][] costs,int[][] predecessors)
+   {
+//       costs=new long[V][V];
+       int i, j, k;
+       for (i = 0; i < V; i++)
+           for (j = 0; j < V; j++)
+               costs[i][j] = predecessors[i][j];
+       // Adding vertices individually
+       for (k = 0; k < V; k++) {
+           for (i = 0; i < V; i++) {
+               for (j = 0; j < V; j++) {
+                   int min;
+                   if(costs[i][k]==INF ||costs[k][j]==INF)
+                       min=costs[i][j];
+                   else
+                       min=Math.min(costs[i][j], costs[i][k] + costs[k][j]) ;
+                   if(min !=INF)
+                        costs[i][j] = Math.min(costs[i][j], costs[i][k] + costs[k][j]);
+               }
+           }
+       }
+       for(i=0;i<V;i++)
+       {
+           if(costs[i][i]!=0)
+               return true;
+       }
+       return false;
+   }
     class Node implements Comparable<Node> {
         int vertex;
         int dist;

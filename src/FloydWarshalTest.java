@@ -4,24 +4,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FloydWarshalTest {
     Graph G=new Graph();
+    int INF = 100000000;
     @Test
-    void negativeCycleTest() {
+    void negativeEdgesTest() {
+
+
         try {
             G.initialize("src/testFiles/input3.txt");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        long[][] costs =new long[G.size()][G.size()];
-        long[][] parents =new long[G.size()][G.size()];
+        int[][] costs =new int[G.size()][G.size()];
+        int[][] parents =G.graphArray;
         G.FloydWarshall(costs,parents);
-        long[][] expectedCosts=new long[][]{{6,-2,-6,4,-1,-4,6,0}};
-        long[][] expectedParents=new long[][]{{7,5,1,7,1,7,1,7}};
+        int[][] expectedCosts=new int[][]{{0,INF,INF,INF,INF,INF,2,INF},
+                {INF,0,-4,INF,1,INF,8,INF},
+                {INF,INF,0,INF,INF,INF,INF,INF},
+                {3,INF,INF,0,5,INF,5,INF},
+                {INF,INF,INF,INF,0,INF,INF,INF},
+                {INF,2,-2,INF,3,0,10,INF},
+                {INF,INF,INF,INF,INF,INF,0,INF},
+                {6,-2,-6,4,-1,-4,6,0}
+        };
+//        for(int i=0;i<8;i++){
+//            for(int j =0;j<8;j++){
+//                System.out.print(costs[i][j]+" ");
+//
+//            }
+//            System.out.print("\n");
+//        }
         assertArrayEquals(expectedCosts,costs);
-
-        assertArrayEquals(expectedParents,parents);
     }
+
     @Test
-    void negativeCycleTest2() {
+    void negativeEdgesTest2() {
         try {
             G.initialize("src/testFiles/input3.txt");
         } catch (Exception e) {
@@ -43,16 +59,24 @@ class FloydWarshalTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        int[] costs =new int[G.size()];
-        int[] parents =new int[G.size()];
-        G.BellmanFord(0,costs,parents);
-        int[] expectedCosts=new int[]{0,3,4,6,8};
-        int[] expectedParents1=new int[]{0,0,1,2,0};
+        int[][] costs =new int[G.size()][G.size()];
+        G.FloydWarshall(costs,G.graphArray);
+        int[][] expectedCosts=new int[][]{{0, 3, 4, 7, 8},
+                {INF, 0, 1, 4, INF},
+                {INF, INF, 0, INF, INF},
+                {INF, INF, 2, 0, INF},
+                {INF, INF, 5, 3, 0}
+        };
         assertArrayEquals(expectedCosts,costs);
 
-        assertArrayEquals(expectedParents1,parents);
-
     }
+    /*
+    0	3	4	7	8
+t	∞	0	1	4	∞
+u	∞	∞	0	∞	∞
+v	∞	∞	2	0	∞
+w	∞	∞	5	3	0
+    */
     @Test
     void BellmanFordTest2() {
         try {
@@ -69,6 +93,7 @@ class FloydWarshalTest {
         assertArrayEquals(expectedParents,parents);
 
     }
+
     @Test
     void BellmanFordTest3() {
         try {

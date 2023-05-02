@@ -32,8 +32,8 @@ public class Main {
             int destination;
             int size = G.size() ;
             int[] costs = new int[size];
-            long[][] costsF = new long[size][size];
-            long[][] predecessors = new long[size][size];
+            int[][] costsF = new int[size][size];
+//            long[][] predecessors = new long[size][size];
             int[] parents = new int[size];
             int whichAlg;
             System.out.println("enter 1 to find shortest path from source node to all other nodes");
@@ -114,7 +114,7 @@ public class Main {
                             }
                             case 2 -> {
                                 long startTime = System.nanoTime();
-                                G.FloydWarshall(costsF, predecessors);
+                                G.FloydWarshall(costsF, G.graphArray);
                                 long endTime = System.nanoTime();
                                 System.out.println("--------Floyd Warshall's algorithm-------");
                                 System.out.println("enter source");
@@ -221,7 +221,7 @@ public class Main {
                                         break;
                                     }
                                     long startTime = System.nanoTime();
-                                    G.FloydWarshall(costsF, predecessors);
+                                    G.FloydWarshall(costsF, G.graphArray);
                                     long endTime = System.nanoTime();
                                     System.out.println("enter destination ");
                                     System.out.println("enter -1 to exit process\n");
@@ -255,5 +255,17 @@ public class Main {
 //        graph.printParents(parents);
         Main m=new Main();
        m.menu();
+//        Graph sama=new Graph();
+//
+//        long costs[][]=new long[5][5];
+//        long pre[][]={{0,3,8,100000,-4},{100000,0,100000,1,7},{100000,4,0,-5,100000},{2,100000,100000,6,0},{100000,100000,100000,6,0}};
+//        sama.FloydWarshall(costs,pre);
+//        System.out.println(sama.V);
+//        for (int i = 0; i < 5; i++) {
+//            for (int j = 0; j < 5; j++) {
+//                System.out.print(costs[i][j] + " ");
+//            }
+//            System.out.print("\n");
+//        }
     }
 }

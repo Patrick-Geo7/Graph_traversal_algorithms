@@ -26,13 +26,6 @@ class FloydWarshalTest {
                 {INF,INF,INF,INF,INF,INF,0,INF},
                 {6,-2,-6,4,-1,-4,6,0}
         };
-//        for(int i=0;i<8;i++){
-//            for(int j =0;j<8;j++){
-//                System.out.print(costs[i][j]+" ");
-//
-//            }
-//            System.out.print("\n");
-//        }
         assertArrayEquals(expectedCosts,costs);
     }
 
@@ -70,13 +63,6 @@ class FloydWarshalTest {
         assertArrayEquals(expectedCosts,costs);
 
     }
-    /*
-    0	3	4	7	8
-t	∞	0	1	4	∞
-u	∞	∞	0	∞	∞
-v	∞	∞	2	0	∞
-w	∞	∞	5	3	0
-    */
     @Test
     void BellmanFordTest2() {
         try {

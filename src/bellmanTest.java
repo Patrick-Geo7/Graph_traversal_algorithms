@@ -5,7 +5,7 @@ public class bellmanTest {
 
         Graph G=new Graph();
         @Test
-        void negativeCycleTest() {
+        void negativeEdgesTest() {
                 try {
                         G.initialize("src/testFiles/input3.txt");
                 } catch (Exception e) {

@@ -21,20 +21,17 @@ public class bellmanTest {
                 assertArrayEquals(expectedParents,parents);
         }
         @Test
-        void negativeCycleTest2() {
+        void negativeCycleTest() {
                 try {
-                        G.initialize("src/testFiles/input3.txt");
+                        G.initialize("src/testFiles/input7.txt");
                 } catch (Exception e) {
                         throw new RuntimeException(e);
                 }
                 int[] costs =new int[G.size()];
                 int[] parents =new int[G.size()];
-                G.BellmanFord(7,costs,parents);
-                int[] expectedCosts=new int[]{6,-2,-6,4,-1,-4,6,0};
-                int[] expectedParents=new int[]{7,5,1,7,1,7,1,7};
-                assertArrayEquals(expectedCosts,costs);
-
-                assertArrayEquals(expectedParents,parents);
+                boolean valid=G.BellmanFord(0,costs,parents);
+                System.out.println(valid);
+                assertFalse(valid);
         }
         @Test
         void BellmanFordTest1() {

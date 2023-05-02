@@ -170,26 +170,21 @@ public class Graph implements GraphIF {
         costs[s] = 0;
         parents[s] = s;
         for (int i = 0; i < V - 1; i++) {
-//            System.out.println(i);
-//            dist1d(costs,s);
+
             boolean finished = true;
             for (int[] e : edgeList) {
                 int u = e[0];
                 int v = e[1];
                 int wt = e[2];
-
                 //relaxation step
                 if (costs[u] != INF && costs[u] + wt < costs[v]) {
                     costs[v] = costs[u] + wt;
                     parents[v] = u;
                     finished = false;
-
                 }
             }
-            if (finished) {
+            if (finished)
                 return true;
-            }
-
         }
         // one more iteration to check for negative wt cycles
         for (int[] e : edgeList) {
@@ -197,7 +192,7 @@ public class Graph implements GraphIF {
             int v = e[1];
             int wt = e[2];
             //relaxation step
-            if (costs[u] != INF && costs[u] + wt < costs[v]) {
+            if (costs[u] != INF && (costs[u] + wt < costs[v])) {
                 System.out.println("\ninfeasible:negative wt cycle detected");
                 return false;
             }

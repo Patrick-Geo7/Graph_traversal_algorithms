@@ -88,7 +88,6 @@ public class Graph implements GraphIF {
 
     @Override
     public boolean Dijkstra(int s, int[] costs, int[] parents) {
-        // TODO Auto-generated method stub
         // O(nlog(n)+m)
         // make all the nodes paths infinity ... and all of them unsure
         // make the start node = 0
@@ -100,10 +99,8 @@ public class Graph implements GraphIF {
         Arrays.fill(costs, INF);
         costs[s] = 0;
         parents[s] = s;
-
         PriorityQueue<Node> heap = new PriorityQueue<>();
         heap.offer(new Node(s, 0));
-
         boolean[] visited = new boolean[this.V];
 
         while (!heap.isEmpty()) {
@@ -183,8 +180,8 @@ public class Graph implements GraphIF {
                     finished = false;
                 }
             }
-            if (finished)
-                return true;
+//            if (finished)
+//                return true;
         }
         // one more iteration to check for negative wt cycles
         for (int[] e : edgeList) {
@@ -242,27 +239,32 @@ public class Graph implements GraphIF {
        int i, j, k;
        for (i = 0; i < V; i++)
            for (j = 0; j < V; j++)
-               costs[i][j] = predecessors[i][j];
+               costs[i][j] = graphArray[i][j];
        // Adding vertices individually
        for (k = 0; k < V; k++) {
            for (i = 0; i < V; i++) {
                for (j = 0; j < V; j++) {
-                   int min;
-                   if(costs[i][k]==INF ||costs[k][j]==INF)
-                       min=costs[i][j];
-                   else
-                       min=Math.min(costs[i][j], costs[i][k] + costs[k][j]) ;
-                   if(min !=INF)
-                        costs[i][j] = Math.min(costs[i][j], costs[i][k] + costs[k][j]);
+                   if(costs[i][k]!=INF &&costs[k][j]!=INF) {
+                       costs[i][j] = Math.min(costs[i][j], costs[i][k] + costs[k][j]);
+                       predecessors[i][k] = predecessors[k][j];
+                   }
                }
            }
        }
+//       for(int s=0;s<costs.length;s++){
+//           System.out.print("{");
+//           for(int m=0;m<costs[0].length;m++){
+//               System.out.print(costs[s][m]+",");
+//
+//           }
+//           System.out.print("},\n");
+//       }
        for(i=0;i<V;i++)
        {
-           if(costs[i][i]!=0)
-               return true;
+           if(costs[i][i]<0)
+               return false;
        }
-       return false;
+       return true;
    }
     class Node implements Comparable<Node> {
         int vertex;

@@ -107,11 +107,9 @@ public class bellmanTest {
                 int[] costs =new int[G.size()];
                 int[] parents =new int[G.size()];
                 G.BellmanFord(0,costs,parents);
-                int[] expectedCosts=new int[]{0,5,4,8,7,100000000};
-                int[] expectedParents=new int[]{0,2,0,1,2,0};
+                int[] expectedCosts=new int[]{0,5,4,8,7};
+                int[] expectedParents=new int[]{0,2,0,1,2};
                 assertArrayEquals(expectedCosts,costs);
                 assertArrayEquals(expectedParents,parents);
         }
-
-
 }

@@ -1,6 +1,8 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.BufferedReader;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 import static java.lang.Integer.parseInt;
@@ -12,6 +14,9 @@ public class Graph implements GraphIF {
     int[][] edgeList;
     boolean hasNegative;
     int INF = 100000000;
+
+    ArrayList<ArrayList<Integer>> edges;
+
 
     @Override
     public void initialize(String path) throws Exception {
@@ -25,6 +30,8 @@ public class Graph implements GraphIF {
         E = parseInt(input[1]);
         graphArray = new int[V][V];
         edgeList = new int[E][3];
+        edges = new ArrayList<>(this.V);
+        edges.addAll(Collections.nCopies(this.V,null));
         //       Double positiveInfinity = Double.POSITIVE_INFINITY;
         //initializing the adjacency matrix
         for (int i = 0; i < V; i++) {
@@ -46,7 +53,33 @@ public class Graph implements GraphIF {
             if(parseInt(line[2])<0){
                 this.hasNegative=true;
             }
+
+            ArrayList<Integer> temp = edges.get(parseInt(line[0]));
+
+            if(temp == null){
+                ArrayList<Integer> a = new ArrayList<>();
+                a.add(parseInt(line[1]));
+                edges.set(parseInt(line[0]), a);
+            }
+            else{
+                temp.add(parseInt(line[1]));
+                edges.set(parseInt(line[0]),temp);
+            }
+//            System.out.println(edges.size());
         }
+        System.out.println("--------------------------------------------");
+        for(int i=0; i<this.V; i++){
+            System.out.println();
+            System.out.print(i+")  ");
+            ArrayList<Integer> t = edges.get(i);
+            if(t == null){continue;}
+            for(int j: t){
+                System.out.print(j+"-");
+            }
+
+        }
+
+
         br.close();
 //        for (int i = 0; i < V; i++) {
 //            for (int j = 0; j < V; j++) {
@@ -88,7 +121,8 @@ public class Graph implements GraphIF {
 
     @Override
     public boolean Dijkstra(int s, int[] costs, int[] parents) {
-        // O(nlog(n)+m)
+        // O(Vlog(V)+m)
+
         // make all the nodes paths infinity ... and all of them unsure
         // make the start node = 0
         // recursion loop for all vertices
@@ -96,15 +130,16 @@ public class Graph implements GraphIF {
         // go to all their neighbours [u] ... if [v] + weight < [u] ... then [u] = [v] + weight
         // make [v] sure
         // go to recursion
-        Arrays.fill(costs, INF);
+        Arrays.fill(costs, INF);  //O(V)
         costs[s] = 0;
         parents[s] = s;
-        PriorityQueue<Node> heap = new PriorityQueue<>();
-        heap.offer(new Node(s, 0));
+        PriorityQueue<Node> heap = new PriorityQueue<>(this.V);
+        heap.offer(new Node(s, 0));  //O(log V)
         boolean[] visited = new boolean[this.V];
 
+        // while loop O(V)
         while (!heap.isEmpty()) {
-            Node curr = heap.poll();
+            Node curr = heap.poll();  // O(log V)
 
             if (visited[curr.vertex]) {
                 continue;
@@ -112,18 +147,29 @@ public class Graph implements GraphIF {
 
             visited[curr.vertex] = true;
 
-            for (int[] e : this.edgeList) {
+            ArrayList<Integer> vertex = this.edges.get(curr.vertex);
 
-                if (e[0] == curr.vertex) {
-                    int neighbor = e[1];
-                    if (e[2] < 0) {
+            if(vertex == null){
+                continue;
+            }
+
+            //O(nv)  nv = neighbours of V
+            for (int neighbor: vertex) {
+
+                int neighborGain = this.graphArray[curr.vertex][neighbor];
+                if (neighbor != curr.vertex) {
+
+                    // if there is a negative edge return false
+                    if (neighborGain < 0) {
                         return false;
                     }
+                    // --------------------------------
+
                     long weight = this.graphArray[curr.vertex][neighbor];
                     if (weight != INF && !visited[neighbor] && costs[curr.vertex] + weight < costs[neighbor]) {
                         costs[neighbor] = (int) (costs[curr.vertex] + weight);
                         parents[neighbor] = curr.vertex;
-                        heap.offer(new Node(neighbor, costs[neighbor]));
+                        heap.offer(new Node(neighbor, costs[neighbor])); // O(log V)
                     }
                 }
             }

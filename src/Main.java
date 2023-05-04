@@ -81,8 +81,8 @@ public class Main {
                                         }
                                         System.out.print(ANSI_YELLOW);
                                         System.out.println("cost from "+source+" to "+destination+" = " +costs[destination]);
-                                        long t=(endTime - startTime )/ 1000;
-                                        System.out.println("time = "+ (float)t/1000+" ms\n");
+                                        //long t=(endTime - startTime )/ 1000;
+                                        System.out.println("time = "+ (endTime - startTime )/ 1000+" ms\n");
                                         System.out.print(ANSI_RESET);
                                     }
                                 }
@@ -114,8 +114,8 @@ public class Main {
                                         }
                                         System.out.print(ANSI_YELLOW);
                                         System.out.println("cost from "+source+" to "+destination+" = " +costs[destination]);
-                                        long t=(endTime - startTime )/ 1000;
-                                        System.out.println("time = "+ (float)t/1000+" ms\n");
+                                        //long t=(endTime - startTime )/ 1000;
+                                        System.out.println("time = "+ (endTime - startTime )/ 1000+" ms\n");
                                         System.out.println("can be solved "+Nocycle);
                                         System.out.print(ANSI_RESET);
 
@@ -149,8 +149,8 @@ public class Main {
                                     }
                                     System.out.print(ANSI_YELLOW);
                                     System.out.println("cost from "+source+" to "+destination+" = " +costsF[source][destination]);
-                                    long t=(endTime - startTime )/ 1000;
-                                    System.out.println("time = "+ (float)t/1000+" ms\n");
+                                    //long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+(endTime - startTime )/ 1000 +" ms\n");
                                     System.out.println("can be solved "+Nocycle);
                                     System.out.print(ANSI_RESET);
 
@@ -193,8 +193,8 @@ public class Main {
                                     }
                                     System.out.print(ANSI_YELLOW);
                                     System.out.println("cost from " + source + " to " + destination + " = "  + costsF[source][destination]);
-                                    long t=(endTime - startTime )/ 1000;
-                                    System.out.println("time = "+ (float)t/1000+" ms\n");
+                                    //long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (endTime - startTime)/1000+" ms\n");
                                     System.out.print(ANSI_RESET);
                                     costsF=new int[G.size()][G.size()];
                                     parents=new int[G.size()];
@@ -230,8 +230,8 @@ public class Main {
                                     }
                                     System.out.print(ANSI_YELLOW);
                                     System.out.println("cost from " + source + " to " + destination + " = " + costsF[source][destination]);
-                                    long t=(endTime - startTime )/ 1000;
-                                    System.out.println("time = "+ (float)t/1000+" ms\n");
+                                    //long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (endTime - startTime)/1000+" ms\n");
                                     System.out.println("can be solved "+Nocycle);
                                     System.out.print(ANSI_RESET);
                                     costsF=new int[G.size()][G.size()];
@@ -265,8 +265,8 @@ public class Main {
                                     }
                                     System.out.print(ANSI_YELLOW);
                                     System.out.println("cost from " + source + " to " + destination + " = " + costsF[source][destination]);
-                                    long t=(endTime - startTime )/ 1000;
-                                    System.out.println("time = "+ (float)t/1000+" ms\n");
+                                    //long t=(endTime - startTime )/ 1000;
+                                    System.out.println("time = "+ (endTime - startTime)/1000+" ms\n");
                                     System.out.println("can be solved "+Nocycle);
                                     System.out.print(ANSI_RESET);
                                     costsF=new int[G.size()][G.size()];

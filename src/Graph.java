@@ -42,14 +42,23 @@ public class Graph implements GraphIF {
                     graphArray[i][j] = INF;
             }
         }
+
         //reading the edges
+        int redunt = 0;
         for (int i = 0; i < E; i++) {
             st = br.readLine();
             String[] line = st.split(" ");
-            for (int j = 0; j < 3; j++) {
-                edgeList[i][j] = parseInt(line[j]);
+
+            if(graphArray[parseInt(line[0])][parseInt(line[1])] == 0 || graphArray[parseInt(line[0])][parseInt(line[1])] == INF){
+                graphArray[parseInt(line[0])][parseInt(line[1])] = parseInt(line[2]);
+                for (int j = 0; j < 3; j++) {
+                    edgeList[i][j] = parseInt(line[j]);
+                }
             }
-            graphArray[parseInt(line[0])][parseInt(line[1])] = parseInt(line[2]);
+            else{
+                redunt++;
+            }
+
             if(parseInt(line[2])<0){
                 this.hasNegative=true;
             }
@@ -65,19 +74,22 @@ public class Graph implements GraphIF {
                 temp.add(parseInt(line[1]));
                 edges.set(parseInt(line[0]),temp);
             }
+
 //            System.out.println(edges.size());
         }
-        System.out.println("--------------------------------------------");
-        for(int i=0; i<this.V; i++){
-            System.out.println();
-            System.out.print(i+")  ");
-            ArrayList<Integer> t = edges.get(i);
-            if(t == null){continue;}
-            for(int j: t){
-                System.out.print(j+"-");
-            }
-
-        }
+//        System.out.println(redunt);
+//        this.E -= redunt;
+//        System.out.println("--------------------------------------------");
+//        for(int i=0; i<this.V; i++){
+//            System.out.println();
+//            System.out.print(i+")  ");
+//            ArrayList<Integer> t = edges.get(i);
+//            if(t == null){continue;}
+//            for(int j: t){
+//                System.out.print(j+"-");
+//            }
+//
+//        }
 
 
         br.close();
@@ -134,7 +146,7 @@ public class Graph implements GraphIF {
         costs[s] = 0;
         parents[s] = s;
         PriorityQueue<Node> heap = new PriorityQueue<>(this.V);
-        heap.offer(new Node(s, 0));  //O(log V)
+        heap.add(new Node(s, 0));  //O(log V)
         boolean[] visited = new boolean[this.V];
 
         // while loop O(V)
@@ -157,7 +169,7 @@ public class Graph implements GraphIF {
             for (int neighbor: vertex) {
 
                 int neighborGain = this.graphArray[curr.vertex][neighbor];
-                if (neighbor != curr.vertex) {
+
 
                     // if there is a negative edge return false
                     if (neighborGain < 0) {
@@ -171,7 +183,7 @@ public class Graph implements GraphIF {
                         parents[neighbor] = curr.vertex;
                         heap.offer(new Node(neighbor, costs[neighbor])); // O(log V)
                     }
-                }
+
             }
         }
 
